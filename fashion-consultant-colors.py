@@ -4,10 +4,10 @@ from config import personal_api_key
 
 # Add your own OpenAI API key
 api_key = personal_api_key
-client = OpenAI(api_key)
+client = OpenAI(api_key=api_key)
 
-# Hard-coded available colors
-available_colors = available_colors = [
+# Hard-coded shirt colors
+shirt_colors = [
     "cerulean",
     "navy",
     "white",
@@ -17,7 +17,7 @@ available_colors = available_colors = [
 ]
 
 
-def build_prompt(query, available_colors):
+def build_prompt(query, shirt_colors):
     """
     Constructs a prompt for the language model to suggest matching shirt colors
     based on the provided shorts color from the clothes database.
@@ -33,7 +33,7 @@ CLOSET:
 
 The two best matching shirt colors for the SHORTS COLOR are
 """.strip()
-    closet = "\n".join([f"color: {color}" for color in available_colors])
+    closet = "\n".join([f"color: {color}" for color in shirt_colors])
     prompt = prompt_template.format(shorts_color=query, closet=closet).strip()
     return prompt
 
@@ -48,7 +48,7 @@ def llm(prompt):
 
 def rag(query):
     """Performs a Retrieval-Augmented Generation (RAG) process."""
-    prompt = build_prompt(query, available_colors)
+    prompt = build_prompt(query, shirt_colors)
     answer = llm(prompt)
     return answer
 
@@ -58,9 +58,9 @@ def main():
 
     st.title("Fashion Conultant")
 
-    user_input = st.text_input("Enter your short color:")
+    user_input = st.text_input("What color are your shorts?")
 
-    if st.button("Ask"):
+    if st.button("Find Matching Shirt Colors"):
         with st.spinner("Processing..."):
             output = rag(user_input)
             st.success("Completed!")
@@ -68,5 +68,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print(rag("yellow"))
-    # main()
+    main()
