@@ -1,10 +1,10 @@
 import streamlit as st
 from openai import OpenAI
-from config import personal_api_key
+import os
 from closet import shirt_colors
 
-# Add your own OpenAI API key
-client = OpenAI(api_key=personal_api_key)
+# Initiate the OpenAI client using your API key
+client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 
 def build_prompt(query, shirt_colors):
