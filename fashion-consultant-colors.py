@@ -1,6 +1,6 @@
-import streamlit as st
-from openai import OpenAI
 import os
+from openai import OpenAI
+import streamlit as st
 from closet import shirt_colors
 
 # Initiate the OpenAI client using your API key
