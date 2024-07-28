@@ -3,8 +3,7 @@ from openai import OpenAI
 from config import personal_api_key
 
 # Add your own OpenAI API key
-api_key = personal_api_key
-client = OpenAI(api_key=api_key)
+client = OpenAI(api_key=personal_api_key)
 
 # Hard-coded shirt colors
 shirt_colors = [
