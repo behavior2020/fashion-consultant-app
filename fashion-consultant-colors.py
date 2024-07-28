@@ -1,19 +1,10 @@
 import streamlit as st
 from openai import OpenAI
 from config import personal_api_key
+from closet import shirt_colors
 
 # Add your own OpenAI API key
 client = OpenAI(api_key=personal_api_key)
-
-# Hard-coded shirt colors (adjust as needed)
-shirt_colors = [
-    "cerulean",
-    "navy",
-    "white",
-    "black",
-    "gray",
-    "dark green",
-]
 
 
 def build_prompt(query, shirt_colors):
