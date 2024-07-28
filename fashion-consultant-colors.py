@@ -5,7 +5,7 @@ from config import personal_api_key
 # Add your own OpenAI API key
 client = OpenAI(api_key=personal_api_key)
 
-# Hard-coded shirt colors
+# Hard-coded shirt colors (adjust as needed)
 shirt_colors = [
     "cerulean",
     "navy",
