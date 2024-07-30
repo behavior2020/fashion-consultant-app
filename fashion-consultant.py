@@ -17,7 +17,7 @@ def build_prompt(query, closet):
     )
     prompt = f"""
 You're a fashion consultant. Based on the given SHORTS COLOR, suggest two matching items from the CLOSET.
-Ensure the two items in the CLOSET match well in color.  
+Ensure the two items in the CLOSET match well in color. Ensure the two items show in the format COLOR STYLE - TYPE.
 Use only items in the CLOSET when making your suggestions and DO NOT repeat items.
 
 SHORTS COLOR: {query}
@@ -26,8 +26,8 @@ CLOSET:
 {closet_str}
 
 The two best matching outfits for your {query} shorts are:
-1. COLOR STYLE - TYPE 
-2. COLOR STYLE - TYPE
+1. [Shirt 1]
+2. [Shirt 2]
 
 These colors complement {query} nicecly, creating a 
 """.strip()
