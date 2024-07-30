@@ -1,30 +1,37 @@
 import os
 from openai import OpenAI
 import streamlit as st
-from closet import shirt_colors
+from closet import clothes
 
 # Initiate the OpenAI client using your API key
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 
-def build_prompt(query, shirt_colors):
+def build_prompt(query, closet):
     """
     Constructs a prompt for the language model to suggest matching shirt colors
     based on the provided shorts color from the clothes database.
     """
-    prompt_template = """
-You're a fashion consultant. Based on the given SHORTS COLOR, suggest two matching shirt colors from the closet.
-Use only the shirt colors in the closet when making your suggestions and DO NOT repeat colors.
+    closet_str = " ".join(
+        [f"{item['color']} {item['style']} - {item['type']}".title() for item in closet]
+    )
+    prompt = f"""
+You're a fashion consultant. Based on the given SHORTS COLOR, suggest two matching items from the CLOSET.
+Ensure the two items in the CLOSET match well in color.  
+Use only items in the CLOSET when making your suggestions and DO NOT repeat items.
 
-SHORTS COLOR: {shorts_color}
+SHORTS COLOR: {query}
 
 CLOSET: 
-{closet}
+{closet_str}
 
-The two best matching shirt colors for the SHORTS COLOR are
+The two best matching outfits for your {query} shorts are:
+1. COLOR STYLE - TYPE 
+2. COLOR STYLE - TYPE
+
+These colors complement {query} nicecly, creating a 
 """.strip()
-    closet = "\n".join([f"color: {color}" for color in shirt_colors])
-    prompt = prompt_template.format(shorts_color=query, closet=closet).strip()
+
     return prompt
 
 
@@ -38,7 +45,7 @@ def llm(prompt):
 
 def rag(query):
     """Performs a Retrieval-Augmented Generation (RAG) process."""
-    prompt = build_prompt(query, shirt_colors)
+    prompt = build_prompt(query, clothes)
     answer = llm(prompt)
     return answer
 
@@ -50,7 +57,7 @@ def main():
 
     user_input = st.text_input("What color are your shorts?")
 
-    if st.button("Find Matching Shirt Colors"):
+    if st.button("Find Matching Outfit"):
         with st.spinner("Processing..."):
             output = rag(user_input)
             st.success("Completed!")
