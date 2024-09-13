@@ -8,18 +8,19 @@ A Streamlit application that uses OpenAI's GPT-4 to suggest matching shirt color
 ## Setup
 
 ### 1. Clone the repository
-```bash
 git clone https://github.com/your-repo/fashion-consultant-app.git
 cd fashion-consultant-app
 pip install -r requirements.txt
 
-# 2. Set up the `.env` file
-# The application requires an OpenAI API key to function. You need to create a `.env` file in the root directory of the project and add your OpenAI API key.
-# Create a `.env` file and add the following:
+### 2. Set up the `.env` file
+The application requires an OpenAI API key to function. You need to create a `.env` file in the root directory of the project and add your OpenAI API key.
 
+Create a `.env` file and add the following:
 echo 'OPENAI_KEY=your_openai_api_key_here' > .env
 
-# 3. Run the app
-# Start the Streamlit app by running the following command:
-
+### 3. Run the app
+Start the Streamlit app by running the following command:
 streamlit run app.py
+
+### Usage
+Type in the color of your shorts and the app will suggest matching shirt colors using the power of GPT-4!
