@@ -1,10 +1,11 @@
-import os
+from decouple import config
 from openai import OpenAI
 import streamlit as st
 from closet import clothes
 
-# Initiate the OpenAI client using your API key
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+# Read the "OPENAI_KEY" value from .env file and store it in the OPENAI_KEY variable.
+OPENAI_KEY = config("OPENAI_KEY")
+client = OpenAI(api_key=OPENAI_KEY)
 
 
 def build_prompt(query, closet):
